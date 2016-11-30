@@ -20,10 +20,10 @@ Net connections
 
 Some of net connections are shown as arrows with definition of the net to which they connect. I.e. blue arrow with GND means that it is connected to Ground net.
 
-The wide green line is a buss-connection it assumes many separate connections within itself. Every connection at “entrance/exit” to the buss is labeled so for example D2 “entrance/exit”in the Detector part of schematics is connected to D2 in the Microcontroller and LCD part of the schematics. The light green circle with a uC label above simply denotes the buss connection between different sheets of the schematics.
+The wide green line is a buss-connection it assumes many separate connections within itself. Every connection at “entrance/exit” to the buss is labeled. So for example D2 “entrance/exit” in the Detector part of schematics is connected to D2 in the Microcontroller and LCD part of the schematics.
+The light green circle with a uC label above simply denotes the buss connection between different sheets of the schematics.
 
-It should be noted that one connection called “Detector input” does not have any arrows but nevertheless means that this net in the Detector part of the schematics is joined with the “Detector input” net of the High Voltage Generator part of the schematics.
-
+One connection called “Detector input” in the Detector part of the schematics does not have any arrows. Nevertheless this net in the Detector part of the schematics is joined with the “Detector input” net of the High Voltage Generator part of the schematics.
 
 Power supply
 
