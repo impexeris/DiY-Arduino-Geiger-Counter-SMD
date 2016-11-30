@@ -1,4 +1,6 @@
-For easier readability schematics is divided to five functional parts:
+Description
+
+For easier readability schematics is divided into five functional parts:
 
 - Power supply
 - High Voltage Generator
