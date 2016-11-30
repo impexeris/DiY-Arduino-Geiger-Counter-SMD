@@ -33,7 +33,7 @@ The input is limited to max 15V because of the max. 16V rating of the used input
 
 C(U2) and C(U3) are filter capacitors for U2 and U3 chips correspondingly and though they are displayed in this part o the schematics, they are placed close to power pins of chips they are serving.
 
-s7, s8 and s9 are PCB-pad-jumpers where s7 and s9 are both closed and s8 by default open.
+s5, s7, s8 and s9 are PCB-pad-jumpers where s5, s7 and s9 are closed and s8 by default open.
 
 These jumpers are useful if instead of 6.5V to 15V DC  powering from a regulated 5V power source is intended.
 In example:
@@ -43,7 +43,7 @@ In example:
 
 If step-down from hither DC voltage to 5V and regulation is not required it is reasonable to bypass the installed 78L05 regulator. It simplifies powering of the device and provides battery power saving which, though rather small, is always a positive thing for a portable device.
 
-Too bypass the 78L05 regulator the s7 and s9 should be cut-open and s8 should be soldered-close.
+Too bypass the 78L05 regulator the s5, s7 and s9 should be cut-open and s8 should be soldered-close.
 
 Jumper J6 is introduced for future use - add-on boards to facilitate single battery/or DC power supply connection to a composite device. 
 
