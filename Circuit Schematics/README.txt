@@ -39,8 +39,42 @@ These jumpers are useful if instead of 6.5V to 15V DC  powering from a regulated
 In example:
 
 - if your use assumes permanent connection to a power-source and there is a suitable 5V DC regulated power available.
-- if a portable 5V DC power solution is available. For example a rechargeable or non-rechargable lower voltage battery(-ies) with a step-up converter will be used. 
+- if a portable 5V DC power solution is available. For example a rechargeable or non-rechargeable lower voltage battery(-ies) with a step-up converter will be used. 
 
 If step-down from hither DC voltage to 5V and regulation is not required it is reasonable to bypass the installed 78L05 regulator. It simplifies powering of the device and provides battery power saving which, though rather small, is always a positive thing for a portable device.
 
-Too bypass the 78L05 regulator the s7 and s9 should be cut-open and s8 should be soldered-close 
+Too bypass the 78L05 regulator the s7 and s9 should be cut-open and s8 should be soldered-close.
+
+Jumper J6 is introduced for future use - add-on boards to facilitate single battery/or DC power supply connection to a composite device. 
+
+High Voltage Generator
+
+This part of the schematics generates High Voltage at very low power which is necessary for Geiger-Müller tube operation. The generated Voltage can be adjusted between < than 150V and more > than 1KV (1000V) by turning the knob of the multi-turn potentiometer (trimmer) counter -clockwise.
+
+When the maximum possible generated voltage is reached and potentiometer is further counter-clockwise adjusted, then the voltage shall start to drop. It is a normal situation. To get back to working state of the HV generator the knob of the potentiometer has to be turned clockwise and the HV generation shall resume.
+
+It should be noted that High Voltage can only measured with a high impedance Voltmeter (a voltmeter which has high internal resistance. >1 Giga Ohm). Otherwise readings shall be incorrectly low. Practically all popular voltmeters have resistance ranging from 5MΩ to 10MΩ and are not suitable for proper measurements in this case. 
+One of the possible solutions is  to do a measurement by connecting a 1 GΩ  resistor in series to such low impedance voltmeter and then recalculating the correct voltage according to the formula: Vactual = Vread x ((Rmeter + Rprobe) / Rmeter).
+Where:
+- Vactual is the actual measured voltage
+- Vread is the voltage reading on the voltmeter display
+- Rmeter is the internal resistance of the voltmeter (5MΩ to 10MΩ)
+
+R7 reistor is an anode resistor for the Geiger-Müller tube. The 5.1M is a recommended value for most popular low voltage Geiger-Müller tubes produced in Russia/Ukraine.
+Such are for example all modifications or sbm-20, si29bg, sbt9 or sbt11.
+For some other tubes the value of this resistor has to be around 10MΩ. For example LND 712, LND 7317, SBT10 and si8B.
+
+Generally the higher the anode resistor the lower current goes through the tube but pulses produced are longer. When anode resistor is lower pulses are shorter but the tube wear increases. So in addition to the specification recommendations for a particular tube (this value is either explicitly defined or can be calculated from the specified recommended working current and voltage) there has to be a compromise sought when choosing this resistor. As a rule of thumb for the “low working voltage” Geiger-Müller tubes (“low” here means up to 1KV)  the value should stay within 4.7MΩ to 20MΩ.
+
+Detector part
+
+This part of the device receives (detects) pulses coming from the Geiger-Müller tube on the voltage divider formed by R8 and R9. The pulse polarity is then inverted and amplified by Q3.
+Further pulse is shaped and limited for the micro-controller input by C10 and by the rest of the schematics for visual/audible detection indication.
+
+PCB-pad-jumpeers s10 and s4 are generally not used but provides a possibility of more convenient hardware disconnect of the detector from micro-controller input and separation of the “analog” audible indication circuit from the micro-controller.
+
+
+
+
+
+
