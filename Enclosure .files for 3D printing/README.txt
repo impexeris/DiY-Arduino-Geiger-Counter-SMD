@@ -1,8 +1,14 @@
+There are .stl files of enclosure variants for use with different Geiger-Müller tubes.
+The original ones Enclosure5top.stl and Enclosure5bottom.stl are for use with SBM-20 (СБМ-20) tubes
+Other variants contain the name of the tube they are for. Two files (top and bottom) are needed but you can also print the plug_for_serial.stl . It is a plug for the SerialTTl connection openning.
+
+
+
 Suggested print settings for PLA:
 
 0.4  	mm print-head
 0.25 	mm resolution
-20%  	in-fill ratio
+25%  	in-fill ratio
 2    	shells
 50mm/s 	default printing speed (may depend on your PLA)
 50℃  	heated bed
