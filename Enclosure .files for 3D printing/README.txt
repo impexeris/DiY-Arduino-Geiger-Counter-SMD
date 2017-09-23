@@ -8,13 +8,21 @@ Suggested print settings for PLA:
 
 0.4  	mm print-head
 0.25 	mm resolution
-25%  	in-fill ratio
+100%  	in-fill ratio
 2    	shells
 50mm/s 	default printing speed (may depend on your PLA)
 50℃  	heated bed
-215℃	print-head temperature (may depend on your PLA)
-100%    fan speed
-25%  	Support in-fill ratio
+215℃	     print-head temperature (may depend on your PLA)
+100%      fan speed
+25%       support in-fill ratio
+
+(for SBT-11 enclosure)
+35%  	Support in-fill ratio
+Line      Support type
+0mm       Gap between the support and top layer
+5         loops of brim at 0mm from the print
+Touch Platfor Only - support
+
 
      	printing volume enclosed
 
