@@ -1,5 +1,5 @@
 There are .stl files of enclosure variants for use with different Geiger-Müller tubes.
-The original ones Enclosure5top.stl and Enclosure5bottom.stl are for use with SBM-20 (СБМ-20) tubes.
+The original ones Top-For-SBM-20-Tube.stl and Enclosure5bottom.stl are for use with SBM-20 (СБМ-20) tubes.
 Other variants contain the name of the tube they are for (namely STS-5, SI29BG, SBT9 and SBT11/SBT11A). Two files (top and bottom) are needed but you can also print the plug_for_serial.stl . It is a plug for the SerialTTl connection openning if you have cut it open and need to have it plugged.
 
 
