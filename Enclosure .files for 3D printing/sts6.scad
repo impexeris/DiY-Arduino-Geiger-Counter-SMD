@@ -102,6 +102,14 @@ module cutFrame(bxl,bxw,wth,cfh) {
     }
 }
 
+module cutCupInside(cnHght,cnBsDm,cnTpDm,pllwHght) {
+    union() {
+        cylinder(h=cnHght,d1=cnBsDm,d2=cnTpDm,$fn=100) ;
+        translate([0,0,cnHght]) scale([cnTpDm,cnTpDm,pllwHght]) difference() { sphere(d=1,$fn=100) ; translate([-.5,-.5,-1]) cube([1,1,1]) ; }
+    }
+}
+
+
 // wedge
 wedr=4 ;
 wedl=16 ;
@@ -153,6 +161,12 @@ cupl=120 ;
 cupw=boxw ;
 cuph=11 ;
 
+// cut cup inside parameters
+coneBaseDiam=sts6Diam+sts6DiamInc ;
+coneTopDiam=sts6DiamNodes+sts6DiamInc+1 ;
+coneHeight=0.5*(sts6Len-sts6LenBody) ;
+pillowHeight=.3*coneTopDiam ;
+
 
 // lcd - debug
 //translate([wallth+0.5,-2*wallth,-boxh+wallth+0.5]) lcd(lcdpl,lcdpw,lcdph,lcddl,lcddw,lcddh,lcddu,lcddv) ;
@@ -160,25 +174,9 @@ cuph=11 ;
 // sts6 - debug
 //translate([0,boxw-sts6Diam/2-wallth*1.5,-sts6Diam/3]) rotate([0,-90,0]) sts6(sts6LenBody,sts6Len,sts6Diam,sts6DiamNodes,sts6HalfExt) ;
 
-SHOW_CUP_STS6_HOLE=0 ; // 0 or 1
+// four parts to be printed: box 2, cover 1, cup 3 and hole cover 0
 
-if(SHOW_CUP_STS6_HOLE)
-{
-// cup for the sts6 inserting hole
-difference() {
-union() {
-translate([boxl-wallth-0.01,boxw-wallth-sts6Diam/2-sts6DiamInc/2,-sts6Diam/3]) rotate([0,90,0]) cylinder(h=wallth,d1=sts6Diam+sts6DiamInc,d2=sts6Diam+sts6DiamInc,$fn=100) ; // cetnral filling for the wall
-translate([boxl-1.4*wallth-0.01,boxw-wallth-sts6Diam/2-sts6DiamInc/2,-sts6Diam/3]) rotate([0,90,0]) cylinder(h=0.4*wallth,d1=sts6Diam+sts6DiamInc+wallth,d2=sts6Diam+sts6DiamInc+wallth,$fn=100) ; // inner constraint
-}
-union() {
-translate([0,boxw-wallth,-boxh]) cube([boxl,wallth,boxh]) ; // lateral box cut
-translate([boxl-2*wallth,0,]) cube([wallth*2,boxw,boxh]) ; // upper cut
-translate([boxl-2*wallth-wallth/2,0,-cutFrameH]) cube([wallth*2,boxw,boxh]) ; // small stair
-}
-}
-}
-
-
+SHOW_CUP_STS6_HOLE=0 ;
 SHOW_BOX_COVER=1 ;
 SHOW_BOX_BASE=2 ;
 SHOW_STS6_CUP=3 ;
@@ -219,10 +217,13 @@ if(show==SHOW_ALL || show==SHOW_STS6_AND_COVER || show==SHOW_STS6_AND_BOX || sho
 // --> all for sts6cup
 difference() {
     translate([wallth,boxw-sts6Diam/2-wallth*1.5,-sts6Diam/3]) rotate([0,-90,0]) sts6cup(sts6LenBody+wallth,sts6Len+wallth,sts6Diam,sts6DiamNodes,sts6CupLen,sts6CupTh,sts6DiamInc,sts6HalfExt,sts6ShowCut) ;
+    union() {
     for (dx=[0:2/3*boxl/10:2/3*boxl]) translate([-3*wedr-wallth-dx,boxw-wedl-sts6Diam/4.5,sts6Diam/8]) wedge(wedr,wedl,wedrot) ;
+    translate([-2.021*sts6CupLen,boxw-sts6Diam/2-wallth*1.5,-sts6Diam/3]) rotate([0,-90,0]) cutCupInside(coneHeight,coneBaseDiam,coneTopDiam,pillowHeight) ;
+    }
     }
 } // end if
-    
+
 
 if(show==SHOW_ALL || show==SHOW_BOX_AND_COVER || show==SHOW_STS6_AND_BOX || show==SHOW_BOX_BASE )
 {
@@ -281,3 +282,20 @@ difference() { translate([0,0,-(boxh-2*wallth)]) cube([5,sts6Diam+sts6CupTh+sts6
         } }
 }
 } // end if
+
+
+if(show==SHOW_ALL || show==SHOW_CUP_STS6_HOLE)
+{
+// --> cup for the sts6 inserting hole
+difference() {
+union() {
+translate([boxl-wallth-0.01,boxw-wallth-sts6Diam/2-sts6DiamInc/2,-sts6Diam/3]) rotate([0,90,0]) cylinder(h=wallth,d1=sts6Diam+sts6DiamInc,d2=sts6Diam+sts6DiamInc,$fn=100) ; // cetnral filling for the wall
+translate([boxl-1.4*wallth-0.01,boxw-wallth-sts6Diam/2-sts6DiamInc/2,-sts6Diam/3]) rotate([0,90,0]) cylinder(h=0.4*wallth,d1=sts6Diam+sts6DiamInc+wallth,d2=sts6Diam+sts6DiamInc+wallth,$fn=100) ; // inner constraint
+}
+union() {
+translate([0,boxw-wallth,-boxh]) cube([boxl,wallth,boxh]) ; // lateral box cut
+translate([boxl-2*wallth,0,]) cube([wallth*2,boxw,boxh]) ; // upper cut
+translate([boxl-2*wallth-wallth/2,0,-cutFrameH]) cube([wallth*2,boxw,boxh]) ; // small stair
+}
+}
+}
